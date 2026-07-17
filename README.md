@@ -1,6 +1,7 @@
 # Pre-Security-Notes
 These are the notes that i made during i was learning and going through the pre security path of cybersecurity.
 
+ Day 1 
 Module 1 — Introduction to Cybersecurity
 Offensive Security
 Think like an attacker. Find the weakness before someone bad does — with permission.
