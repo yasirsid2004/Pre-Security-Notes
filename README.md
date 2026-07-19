@@ -12,3 +12,5 @@ Prevention — firewalls, antivirus, patching Detection — logs, alerts, SIEM M
 
 Careers in Cybersecurity
 Red Team / Pen Tester — simulate attacks, find flaws legally SOC Analyst — monitor, detect, respond in real time Threat Intelligence — research attacker behaviour, predict moves Security Engineer — build and maintain security infrastructure Malware Analyst — reverse-engineer malicious software Incident Responder — called in after something’s already gone wrong
+
+ Day 2
