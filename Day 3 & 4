@@ -1,0 +1,70 @@
+Day 3 & 4
+Module 3 — How the Web Works
+DNS in Detail
+Domain reads right → left: admin.tryhackme.com
+
+com → TLD
+tryhackme → SLD (Second Level Domain)
+admin → subdomain
+gTLD — generic: .com .org .net ccTLD — country: .in .uk .co.uk Rules: a-z, 0-9, - only. Each label ≤ 63 chars, total ≤ 253.
+
+DNS Records:
+
+A → IPv4
+AAAA → IPv6
+CNAME → alias, one domain points to another (CDN, third-party services)
+MX → mail server + priority
+TXT → SPF, DMARC, domain verification
+nslookup --type=CNAME shop.website.thm
+nslookup --type=MX website.thm
+nslookup --type=TXT website.thm
+DNS lookup flow:
+
+Local cache → Recursive DNS (ISP) → Root server → TLD server → Authoritative server
+Recursive — finds the answer by asking around Authoritative — actually stores the record, gives the final answer TTL — how long the response is cached before querying again
+
+DNS = Layer 7, uses UDP (fast) / TCP (large responses) Attacks: DNS Spoofing, Cache Poisoning, DNS Tunneling
+
+HTTP in Detail
+URL: https://tryhackme.com/room/index
+
+Scheme — https (protocol used)
+Host — tryhackme.com
+Path — /room/index (resource requested, / = index.html)
+Localhost = 127.0.0.1
+HTTP Methods (9 core): GET — fetch, params in URL POST — send data, body carries payload PUT — create/replace PATCH — partial update DELETE — remove HEAD — headers only, no body OPTIONS — what methods does the server support? CONNECT — create a tunnel (proxies) TRACE — diagnostic, echoes request back
+
+
+Response = header (metadata: content-type, cookies, cache) + body (HTML/JSON/file)
+
+How Websites Work
+HTML — structure. Skeleton — headings, forms, links. CSS — style. Colours, fonts, layout. JavaScript — behaviour. Interaction, fetch data, validate forms without page reload. Backend — server-side logic + database. Processes logins, stores data.
+
+Note: HTML comments can leak paths, JS files expose endpoints, unsanitised forms = injection targets.
+
+Putting It All Together
+What happens when you type tryhackme.com and hit Enter:
+
+DNS lookup → TCP handshake → TLS (HTTPS) → HTTP GET → Server responds → Browser renders
+Every step = a potential attack surface.
+
+Module 4 — Computer Fundamentals
+Inside a Computer System
+CPU — executes instructions. Core count + clock speed. RAM — temporary, volatile. Wiped on reboot. Holds active processes and keys in plain text while running. Storage (HDD/SSD) — persistent. OS, files, apps live here. Motherboard — connects everything. GPU — parallel processing. Also used in password cracking. NIC — Network Interface Card. Gives the machine its MAC address. PSU — converts mains power to what components need.
+
+Computer Types
+Desktop/Laptop — general purpose, most common attack surface Server — headless, always-on, runs services (web, DB, DNS). High-value target. Embedded systems — routers, IoT, industrial controls. Often unpatched. Mobile — ARM, sandboxed apps. Vectors: Bluetooth, NFC, rogue apps. VM — software-emulated machine inside a real one. Isolated — good for malware analysis. Cloud instances — on-demand VMs/containers. Attack surface = misconfigurations.
+
+Client-Server Basics
+Client — makes the request (browser, app) Server — receives and responds Communication over HTTP/HTTPS. Request = method + headers + optional body. Response = status + headers + body. 127.0.0.1 — loopback, refers to the device itself (localhost)
+
+Virtualisation Basics
+One physical machine, multiple OS — made possible by a hypervisor.
+
+Type 1 (Bare Metal) — directly on hardware, no host OS. More secure. Used in datacentres. Type 2 (Hosted) — runs on an existing OS. Easier setup (VirtualBox, VMware). What you use on your laptop. Container — isolated box for one app, shares the host OS kernel. Lighter than a VM. Container Image — template used to spin up containers. Pre-packed, reusable.
+
+Cloud Computing Fundamentals
+Public — third-party provider, shared infra (AWS, Azure, GCP) Private — dedicated to one org, more control and security Hybrid — sensitive data on private, scalability on public
+
+IaaS — hardware only. You manage OS + apps. e.g. AWS EC2 PaaS — hardware + OS. You manage apps + data. e.g. Heroku, Google App Engine SaaS — just use the app. You manage your data. e.g. Gmail, Zoom
+
